@@ -74,6 +74,7 @@ case 'fraisHF':
     $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
     $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
     
+    
     //Récupération du bouton pressé par l'utilisateur
     $boutonHorsForfait = filter_input(INPUT_POST, 'bouton', FILTER_DEFAULT, FILTER_SANITIZE_STRING);
     switch($boutonHorsForfait) {
@@ -89,6 +90,7 @@ case 'fraisHF':
             $fraisHF = filter_input(INPUT_POST, 'idFraisHorsForfait', FILTER_DEFAULT, FILTER_SANITIZE_STRING);
             $pdo->supprimerFraisHorsForfait($fraisHF);
             $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
+            $lesMois = $pdo->getLesMoisDisponiblesCL($idVisiteur);
             break;
         case 'supprimer':
             $fraisHF = filter_input(INPUT_POST, 'idFraisHorsForfait', FILTER_DEFAULT, FILTER_SANITIZE_STRING);
@@ -96,9 +98,22 @@ case 'fraisHF':
             $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
             break;
     }
-    
-  
     include 'vues/v_listeVisiteur.php';
     include 'vues /v_validerFicheFrais.php';
+    break;
+
+case 'validerFicheFrais':
+    $lesVisiteurs = $pdo->getLesVisiteursNonComptables();
+    $leMois = $_SESSION['leMois'];
+    $idVisiteur = $_SESSION['visiteurSelectionne'];
+    $lesMois = $pdo->getLesMoisDisponiblesCL($idVisiteur);
+    
+    $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
+    $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
+    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
+    $nbJustificatifs = filter_input(INPUT_POST, 'nbJustificatifs', FILTER_DEFAULT, FILTER_SANITIZE_NUMBER_INT);
+    $pdo->majNbJustificatifs($idVisiteur, $leMois, $nbJustificatifs);
+    $pdo->majEtatFicheFrais($idVisiteur, $leMois, 'VA');
+    include 'vues/v_validationFiche.php';
     break;
 }

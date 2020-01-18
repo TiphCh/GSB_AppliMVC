@@ -7,8 +7,7 @@
  */
 ?>
 
-    <div class="row">    
-
+<div class="row">    
        <h2> Valider la fiche de frais </h2>
         <h3>Eléments forfaitisés</h3>
         <div class="col-md-4">
@@ -107,7 +106,14 @@
         </table>
     </div>
     <div> 
-        <b> Nombre de justificatifs :</b> <input value="<?php echo $nbJustificatifs ?>" size="2"> <br>
+        <form method="post" 
+      action="index.php?uc=validerFicheFrais&action=validerFicheFrais" 
+      role="form"  >  
+        <b> Nombre de justificatifs :</b> <input name="nbJustificatifs" value="<?php echo $nbJustificatifs ?>" size="2"> <br>
         <br> <button class="btn btn-warning" type="submit">Valider</button> 
         <button class="btn btn-danger" type="reset">Réinitialiser</button>
+        
+        </form>
     </div>
+
+
