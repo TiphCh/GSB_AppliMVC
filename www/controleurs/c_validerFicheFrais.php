@@ -16,7 +16,6 @@ case 'afficherVisiteurs' :
 case 'moisDispo' :
     $lesVisiteurs = $pdo->getLesVisiteursNonComptables();
     $idVisiteur = filter_input(INPUT_POST, 'idVisiteur', FILTER_SANITIZE_STRING);
-    // Let the variable name be 'post_data'
     $_SESSION['visiteurSelectionne'] = filter_input(INPUT_POST, 'idVisiteur', FILTER_SANITIZE_STRING);
     $lesMois = $pdo->getLesMoisDisponiblesCL($idVisiteur);
     include 'vues/v_listeVisiteur.php';
@@ -114,6 +113,7 @@ case 'validerFicheFrais':
     $nbJustificatifs = filter_input(INPUT_POST, 'nbJustificatifs', FILTER_DEFAULT, FILTER_SANITIZE_NUMBER_INT);
     $pdo->majNbJustificatifs($idVisiteur, $leMois, $nbJustificatifs);
     $pdo->majEtatFicheFrais($idVisiteur, $leMois, 'VA');
+    
     include 'vues/v_validationFiche.php';
     break;
 }

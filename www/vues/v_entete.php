@@ -83,7 +83,7 @@
                                     </a>
                                 </li>
                                 <li <?php if ($uc == 'suiviPaiement') { ?>class="active"<?php } ?>>
-                                    <a href="index.php?uc=suiviPaiement">
+                                    <a href="index.php?uc=suiviPaiement&action=afficherVisiteur">
                                         <span class="glyphicon glyphicon-list-alt"></span>
                                         Suivre le paiement des fiches de frais 
                                     </a>

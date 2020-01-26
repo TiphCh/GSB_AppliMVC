@@ -38,7 +38,7 @@
         </div>
     </div>
     <br>
-    <div class="panel panel-info">
+    <div class="panel panel-warning">
         <div class="panel-heading">Descriptif des éléments hors forfait </div>
         <table class="table table-bordered table-responsive ">
             <tr>
